@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://parabank.parasoft.com/parabank/index.htm');
+  await page.getByRole('link', { name: 'Register' }).click();
+  await page.locator('[id="customer.firstName"]').click();
+  await page.locator('[id="customer.firstName"]').fill('first');
+  await page.locator('[id="customer.firstName"]').press('Tab');
+  await page.locator('[id="customer.lastName"]').fill('last');
+  await page.locator('[id="customer.lastName"]').press('Tab');
+  await page.locator('[id="customer.address.street"]').fill('add');
+  await page.locator('[id="customer.address.street"]').press('Tab');
+  await page.locator('[id="customer.address.city"]').fill('city');
+  await page.locator('[id="customer.address.city"]').press('Tab');
+  await page.locator('[id="customer.address.state"]').fill('state');
+  await page.locator('[id="customer.address.state"]').press('Tab');
+  await page.locator('[id="customer.address.zipCode"]').fill('zip');
+  await page.locator('[id="customer.address.zipCode"]').press('Tab');
+  await page.locator('[id="customer.phoneNumber"]').fill('phone');
+  await page.locator('[id="customer.phoneNumber"]').press('Tab');
+  await page.locator('[id="customer.ssn"]').fill('ssn');
+  await page.locator('[id="customer.ssn"]').press('Tab');
+  await page.locator('[id="customer.username"]').fill('username');
+  await page.locator('[id="customer.username"]').press('Tab');
+  await page.locator('[id="customer.password"]').fill('password');
+  await page.locator('[id="customer.password"]').press('Tab');
+  await page.locator('#repeatedPassword').fill('again pass');
+  await page.getByRole('button', { name: 'Register' }).click();
+  await page.locator('[id="customer.password"]').click();
+  await page.locator('[id="customer.password"]').click();
+  await page.locator('[id="customer.password"]').fill('123123');
+  await page.locator('#repeatedPassword').click();
+  await page.locator('#repeatedPassword').fill('123123');
+  await page.getByRole('button', { name: 'Register' }).click();
+  await page.getByText('Your account was created').click();
+  await page.getByRole('link', { name: 'Log Out' }).click();
+});
