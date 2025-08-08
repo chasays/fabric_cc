@@ -52,7 +52,7 @@ export class ParabankApi {
     Logger.info(`API Call: GET ${url}`);
     
     const headers = await this.getAuthHeaders();
-    Logger.info(`Using headers: ${JSON.stringify(headers, null, 2)}`);
+    // Logger.info(`Using headers: ${JSON.stringify(headers, null, 2)}`);
     
     const response = await this.request.get(url, { headers });
     
