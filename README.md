@@ -4,6 +4,7 @@ E2E test automation for Parabank using Playwright.
 
 ## Quick Start
 
+
 ### docker-compose
 
 `docker-compose -f docker/docker-compose.yml up`
@@ -13,8 +14,7 @@ E2E test automation for Parabank using Playwright.
 docker run --rm \
   -v $(pwd)/reports:/app/reports \
   -v $(pwd)/allure-results:/app/allure-results \
-  ievjai/parabank-tests:latest pnpm run test:ui
-
+  ievjai/parabank-tests:latest pnpm run test:all
 ```
 here is the test types:
 
