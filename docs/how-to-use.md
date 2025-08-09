@@ -3,10 +3,10 @@
 # quick start
 
 ```Sh
-npm install
-npm i -D allure-commandline
-npm run test:all
-npm run report
+pnpm install
+pnpm i -D allure-commandline
+pnpm run test:all
+pnpm run report
 ```
 
 # dependency
@@ -25,6 +25,6 @@ test account:
 
 # run with filter
 
-`npm run test:e2e -- --grep "User Registration and Login Flow"`
+`pnpm run test:e2e -- --grep "User Registration and Login Flow"`
 
 more usages pls refer to [official url](https://playwright.dev/docs/test-cli#grep)

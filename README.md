@@ -18,10 +18,10 @@ docker run --rm \
 ```
 here is the test types:
 
-- `npm run test:ui` - UI tests
-- `npm run test:api` - API tests  
-- `npm run test:e2e` - E2E tests
-- `npm run test:all` - All tests
+- `pnpm run test:ui` - UI tests
+- `pnpm run test:api` - API tests  
+- `pnpm run test:e2e` - E2E tests
+- `pnpm run test:all` - All tests
 
 
 ## View Reports

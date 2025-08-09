@@ -25,15 +25,16 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                sh 'npm install -g pnpm'
+                sh 'pnpm ci'
                 sh 'npx playwright install'
-                // add more
+                // maybe add more
             }
         }
         
         stage('Lint and Format Check') {
             steps {
-                sh 'npm run lint'
+                sh 'pnpm run lint'
                 sh 'npx prettier --check src tests'
             }
         }
@@ -42,7 +43,7 @@ pipeline {
             parallel {
                 stage('UI Tests') {
                     steps {
-                        sh 'npm run test:ui'
+                        sh 'pnpm run test:ui'
                     }
                     post {
                         always {
@@ -60,13 +61,13 @@ pipeline {
                 
                 stage('API Tests') {
                     steps {
-                        sh 'npm run test:api'
+                        sh 'pnpm run test:api'
                     }
                 }
                 
                 stage('E2E Tests') {
                     steps {
-                        sh 'npm run test:e2e'
+                        sh 'pnpm run test:e2e'
                     }
                 }
             }
