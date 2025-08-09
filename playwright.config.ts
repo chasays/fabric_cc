@@ -25,15 +25,15 @@ export default defineConfig({
     video: 'retain-on-failure',
     actionTimeout: 15000,
     navigationTimeout: 30000,
-    headless: false
+    headless: process.env.CI ? true : false
   },
 
   projects: [
     {
       name: 'chromium',
-      // use: { ...devices['Desktop Chrome'] },
+    //   use: { ...devices['Desktop Chrome'] },
       // avoid cloudflare bot verification, use local chrome, instead of chromium
-      use: { ...devices['Desktop Chrome'],  channel: 'chrome' },
+    //   use: { ...devices['Desktop Chrome'],  channel: 'chrome' },
     },
     // {
     //   name: 'firefox',

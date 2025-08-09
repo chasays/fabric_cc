@@ -7,7 +7,7 @@
     "test:api": "playwright test tests/api --reporter=allure-playwright",
     "test:e2e": "playwright test tests/e2e --reporter=allure-playwright",
     "test:all": "playwright test --reporter=allure-playwright",
-    "report": "allure serve allure-results",
+    "report": "allure serve allure-results --port 5050 --host 0.0.0.0",
     "lint": "eslint src tests --ext .ts",
     "format": "prettier --write src tests"
   },

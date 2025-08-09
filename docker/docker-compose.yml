@@ -1,29 +1,25 @@
-version: '3.8'
-
 services:
   parabank-tests:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
+    image: ievjai/parabank-tests:latest
     volumes:
-      - ../reports:/app/reports
-      - ../allure-results:/app/allure-results
+      - ./reports:/app/reports
+      - ./allure-results:/app/allure-results
     environment:
       - BASE_URL=https://parabank.parasoft.com
       - CI=true
-    networks:
-      - test-network
+    command: pnpm run test:ui
 
-  allure-server:
-    image: frankescobar/allure-docker-service
+  allure-report:
+    image: ievjai/parabank-tests:latest
+    command: pnpm run report
     ports:
       - "5050:5050"
     volumes:
-      - ../allure-results:/app/allure-results
-      - ../allure-reports:/app/default-reports
-    networks:
-      - test-network
+      - ./allure-results:/app/allure-results
+    depends_on:
+      parabank-tests:
+        condition: service_completed_successfully
 
 networks:
-  test-network:
+  default:
     driver: bridge 
