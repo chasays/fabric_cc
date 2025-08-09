@@ -116,7 +116,7 @@ export abstract class BasePage {
           Logger.info(`Click successful - success condition met on attempt ${attempt}`);
           return; // success, success check element is visible
         } else {
-          Logger.info(`Success condition not met after click on attempt ${attempt}, will retry`);
+          Logger.warn(`Success condition not met after click on attempt ${attempt}, will retry`);
           
           if (attempt < maxRetries) {
             Logger.info(`Waiting ${retryDelay}ms before retry...`);

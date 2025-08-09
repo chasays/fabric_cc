@@ -13,6 +13,7 @@ import { User } from '../types';
  * - registrationPage: Pre-configured registration page instance  
  * - homePage: Pre-configured home page instance
  * - registeredUser: Automatically creates and registers a new user for testing
+ * - authenticatedApiContext: Provides an authenticated API context for API testing
  * - todo add more fixtures: like setup user, teardown user, etc.
  * 
  * Usage:
@@ -21,6 +22,11 @@ import { User } from '../types';
  *   await loginPage.login(registeredUser);
  *   // ... test logic real code ~~~
  * });
+ * 
+ * test('api test', async ({ authenticatedApiContext, registeredUser }) => {
+ *   const api = authenticatedApiContext;
+ *   // ... API test logic
+ * });
  * ```
  */
 type UserFixtures = {
@@ -28,6 +34,11 @@ type UserFixtures = {
   registrationPage: RegistrationPage;
   homePage: HomePage;
   registeredUser: User;
+  authenticatedApiContext: {
+    page: any;
+    request: any;
+    user: User;
+  };
 };
 
 export const test = base.extend<UserFixtures>({
@@ -56,6 +67,24 @@ export const test = base.extend<UserFixtures>({
     await registrationPage.verifyRegistrationSuccess();
     
     await use(user);
+  },
+
+  authenticatedApiContext: async ({ page, request, registeredUser, loginPage }, use) => {
+    // Login the user to establish authentication context
+    await loginPage.navigate();
+    await loginPage.login(registeredUser);
+    
+    // Verify login was successful
+    const isLoggedIn = await loginPage.isLoggedIn();
+    if (!isLoggedIn) {
+      throw new Error('Failed to authenticate user for API testing');
+    }
+    
+    await use({
+      page,
+      request,
+      user: registeredUser
+    });
   }
 });
 

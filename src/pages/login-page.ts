@@ -54,7 +54,7 @@ export class LoginPage extends BasePage {
         
         // If logout button is not visible, login might have failed
         if (attempt < maxRetries) {
-          Logger.info(`Login attempt ${attempt} failed, waiting ${retryDelay}ms before retry...`);
+          Logger.warn(`Login attempt ${attempt} failed, waiting ${retryDelay}ms before retry...`);
           await this.page.waitForTimeout(retryDelay);
           
           // Clear the form for next attempt
@@ -64,7 +64,7 @@ export class LoginPage extends BasePage {
       } catch (error) {
         Logger.error(`Login attempt ${attempt} failed with error: ${error}`);
         if (attempt < maxRetries) {
-          Logger.info(`Waiting ${retryDelay}ms before retry...`);
+          Logger.warn(`Waiting ${retryDelay}ms before retry...`);
           await this.page.waitForTimeout(retryDelay);
         } else {
           throw new Error(`Login failed after ${maxRetries} attempts: ${error}`);

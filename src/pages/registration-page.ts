@@ -71,7 +71,7 @@ export class RegistrationPage extends BasePage {
         const isUsernameError = await this.usernameError.isVisible();
         
         if (isUsernameError) {
-          Logger.info(`Username ${user.username} already exists, generating new username`);
+          Logger.warn(`Username ${user.username} already exists, generating new username`);
           
           if (attempt < maxRetries) {
             // Generate new username and update user object

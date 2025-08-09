@@ -87,6 +87,6 @@ test.describe('Parabank E2E Tests', () => {
     expect(billPaymentTransaction).toBeDefined();
     await parabankApi.validateTransactionDetails(billPaymentTransaction!, transferAmount);
     
-    Logger.info('E2E test completed successfully');
+    Logger.info('UI test completed successfully');
   });
 }); 
