@@ -3,6 +3,7 @@ pipeline {
     
     environment {
         BASE_URL = 'https://parabank.parasoft.com'
+        NODE_VERSION = '20.18.0'
         // add others
     }
     
