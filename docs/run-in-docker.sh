@@ -18,5 +18,6 @@ docker run --rm \
 exit 0
 # push image to hub
 # docker build -f docker/Dockerfile -t parabank-tests:latest .
+# docker tag parabank-tests:latest ievjai/parabank-tests:latest
 # docker login
 # docker push xxx
