@@ -5,10 +5,10 @@ dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
-//   testDir: './tests/e2e',
+//   testDir: './tests/api',
   timeout: 60000, 
   expect: { timeout: 30000 }, // Increased from 15000 to 30 seconds
-  fullyParallel: false,
+  fullyParallel: false, // more works will registe failed.
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
     
