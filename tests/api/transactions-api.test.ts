@@ -71,10 +71,13 @@ test.describe('API Tests - Transactions', () => {
     
     // Test 4: Additional API validations
     expect(targetTransaction!.accountId).toBe(accounts[1].accountId);
+    expect(targetTransaction!.amount).toBe(testAmount);
     expect(targetTransaction!.id).toBeDefined();
     expect(targetTransaction!.date).toBeDefined();
     expect(targetTransaction!.type).toBeDefined();
+    expect(targetTransaction!.type).toContain('Credit');
     expect(targetTransaction!.description).toBeDefined();
+    expect(targetTransaction!.description).toContain('Funds Transfer Received');
     
     Logger.info('All API tests passed successfully');
   });
