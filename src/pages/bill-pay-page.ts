@@ -29,24 +29,54 @@ export class BillPayPage extends BasePage {
     this.amountInput = page.locator('input[name="amount"]');
     this.fromAccountSelect = page.locator('select[name="fromAccountId"]');
     this.sendPaymentButton = page.locator('input[value="Send Payment"]');
-    this.confirmationMessage = page.locator('.title:has-text("Bill Payment Complete")');
+    this.confirmationMessage = page.locator(
+      '.title:has-text("Bill Payment Complete")'
+    );
   }
 
   async payBill(billPayment: BillPayment): Promise<void> {
     // Set verify account number to same as account number
     billPayment.verifyAccountNumber = billPayment.accountNumber;
 
-    await this.fillElement(this.payeeNameInput, billPayment.payeeName, 'Payee Name');
+    await this.fillElement(
+      this.payeeNameInput,
+      billPayment.payeeName,
+      'Payee Name'
+    );
     await this.fillElement(this.addressInput, billPayment.address, 'Address');
     await this.fillElement(this.cityInput, billPayment.city, 'City');
     await this.fillElement(this.stateInput, billPayment.state, 'State');
     await this.fillElement(this.zipCodeInput, billPayment.zipCode, 'Zip Code');
-    await this.fillElement(this.phoneNumberInput, billPayment.phoneNumber, 'Phone Number');
-    await this.fillElement(this.accountNumberInput, billPayment.accountNumber, 'Account Number');
-    await this.fillElement(this.verifyAccountNumberInput, billPayment.verifyAccountNumber, 'Verify Account Number');
-    await this.fillElement(this.amountInput, billPayment.amount.toString(), 'Amount');
-    await this.selectOption(this.fromAccountSelect, billPayment.fromAccountId, 'From Account');
+    await this.fillElement(
+      this.phoneNumberInput,
+      billPayment.phoneNumber,
+      'Phone Number'
+    );
+    await this.fillElement(
+      this.accountNumberInput,
+      billPayment.accountNumber,
+      'Account Number'
+    );
+    await this.fillElement(
+      this.verifyAccountNumberInput,
+      billPayment.verifyAccountNumber,
+      'Verify Account Number'
+    );
+    await this.fillElement(
+      this.amountInput,
+      billPayment.amount.toString(),
+      'Amount'
+    );
+    await this.selectOption(
+      this.fromAccountSelect,
+      billPayment.fromAccountId,
+      'From Account'
+    );
     await this.clickElement(this.sendPaymentButton, 'Send Payment button');
-    await this.verifyText(this.confirmationMessage, 'Bill Payment Complete', 'Payment confirmation');
+    await this.verifyText(
+      this.confirmationMessage,
+      'Bill Payment Complete',
+      'Payment confirmation'
+    );
   }
-} 
+}

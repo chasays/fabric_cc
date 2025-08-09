@@ -14,26 +14,30 @@ export class AccountsOverviewPage extends BasePage {
 
   async getAccountDetails(): Promise<Account[]> {
     await this.waitForElement(this.accountsTable);
-    
+
     const accounts: Account[] = [];
     const rows = await this.accountsTable.locator('tbody tr').all();
-    
+
     for (const row of rows) {
       const cells = await row.locator('td').all();
       if (cells.length >= 3) {
-        const accountNumber = await cells[0].textContent() || '';
-        const balance = parseFloat((await cells[1].textContent() || '').replace(', ', ''));
-        const availableAmount = parseFloat((await cells[2].textContent() || '').replace(', ', ''));
-        
+        const accountNumber = (await cells[0].textContent()) || '';
+        const balance = parseFloat(
+          ((await cells[1].textContent()) || '').replace(', ', '')
+        );
+        const availableAmount = parseFloat(
+          ((await cells[2].textContent()) || '').replace(', ', '')
+        );
+
         accounts.push({
           accountId: accountNumber,
           accountNumber: accountNumber,
           type: 'CHECKING', // Default, can be enhanced to detect actual type
-          balance: balance
+          balance: balance,
         });
       }
     }
-    
+
     return accounts;
   }
 
@@ -47,4 +51,4 @@ export class AccountsOverviewPage extends BasePage {
     const balance = parseFloat(balanceText.replace(', ', ''));
     return balance;
   }
-} 
+}

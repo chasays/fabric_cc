@@ -38,4 +38,4 @@ export interface BillPayment {
   verifyAccountNumber: string;
   amount: number;
   fromAccountId: string;
-} 
+}

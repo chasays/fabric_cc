@@ -5,4 +5,4 @@
 
 // record to jira or github issue
 // todo
-import './analyze-failed'
+import './analyze-failed';

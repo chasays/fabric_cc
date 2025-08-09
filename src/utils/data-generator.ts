@@ -2,7 +2,11 @@ import { faker } from '@faker-js/faker';
 import { User, BillPayment } from '../types';
 
 export class DataGenerator {
-  static generateUniqueUsername(suffix: string = '',suffix_1: string = '', suffix_len: number = 6): string {
+  static generateUniqueUsername(
+    suffix: string = '',
+    suffix_1: string = '',
+    suffix_len: number = 6
+  ): string {
     // firstname + lastname + 6 ramdom, ensure unique in every test
     // const firstname = faker.person.firstName();
     // const lastName = faker.person.lastName();
@@ -26,7 +30,7 @@ export class DataGenerator {
       phoneNumber: faker.phone.number(),
       ssn: faker.string.numeric(9),
       username: _username,
-      password: _password
+      password: _password,
     };
   }
 
@@ -43,7 +47,7 @@ export class DataGenerator {
       accountNumber: accountNumber,
       verifyAccountNumber: accountNumber,
       amount: faker.number.float({ min: 50, max: 500, fractionDigits: 2 }),
-      fromAccountId
+      fromAccountId,
     };
   }
-} 
+}

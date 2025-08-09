@@ -1,3 +1,3 @@
-// handle some snapshot compare 
+// handle some snapshot compare
 // reduce to check more items
 // todo

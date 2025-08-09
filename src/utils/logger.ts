@@ -24,4 +24,4 @@ export class Logger {
   static warn(message: string): void {
     console.warn(this.formatMessage('WARN', message));
   }
-} 
+}

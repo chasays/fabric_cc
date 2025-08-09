@@ -20,7 +20,7 @@ export class LoginPage extends BasePage {
     this.errorMessage = page.locator('.error');
     this.logOutButton = page.locator('a:has-text("Log Out")');
   }
-  
+
   // add logout
   async logout(): Promise<void> {
     await this.clickElement(this.logOutButton, 'Log Out button');
@@ -31,32 +31,38 @@ export class LoginPage extends BasePage {
     if (await this.logOutButton.isVisible()) {
       return;
     }
-   
+
     const maxRetries = 3;
     const retryDelay = 3000; // 3 seconds
-    
+
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
-        Logger.info(`Login attempt ${attempt}/${maxRetries} for user: ${user.username}`);
-        
+        Logger.info(
+          `Login attempt ${attempt}/${maxRetries} for user: ${user.username}`
+        );
+
         await this.fillElement(this.usernameInput, user.username, 'Username');
         await this.fillElement(this.passwordInput, user.password, 'Password');
         await this.clickElement(this.loginButton, 'Login button');
-        
+
         // Wait for login to complete and check for logout button
         try {
           await this.waitForLoginSuccess(3000); // Wait up to 5 seconds for login success
           Logger.info(`Login successful on attempt ${attempt}`);
           return;
         } catch (error) {
-          Logger.info(`Login attempt ${attempt} failed - logout button not found`);
+          Logger.info(
+            `Login attempt ${attempt} failed - logout button not found`
+          );
         }
-        
+
         // If logout button is not visible, login might have failed
         if (attempt < maxRetries) {
-          Logger.warn(`Login attempt ${attempt} failed, waiting ${retryDelay}ms before retry...`);
+          Logger.warn(
+            `Login attempt ${attempt} failed, waiting ${retryDelay}ms before retry...`
+          );
           await this.page.waitForTimeout(retryDelay);
-          
+
           // Clear the form for next attempt
           await this.usernameInput.clear();
           await this.passwordInput.clear();
@@ -67,13 +73,17 @@ export class LoginPage extends BasePage {
           Logger.warn(`Waiting ${retryDelay}ms before retry...`);
           await this.page.waitForTimeout(retryDelay);
         } else {
-          throw new Error(`Login failed after ${maxRetries} attempts: ${error}`);
+          throw new Error(
+            `Login failed after ${maxRetries} attempts: ${error}`
+          );
         }
       }
     }
-    
+
     // If we get here, all attempts failed
-    throw new Error(`Login failed after ${maxRetries} attempts - logout button not found`);
+    throw new Error(
+      `Login failed after ${maxRetries} attempts - logout button not found`
+    );
   }
 
   async clickRegisterLink(): Promise<void> {

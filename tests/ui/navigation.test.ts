@@ -6,4 +6,4 @@ test.describe('Navigation Tests', () => {
     await homePage.verifyGlobalNavigationMenuItems();
     // todo
   });
-}); 
+});

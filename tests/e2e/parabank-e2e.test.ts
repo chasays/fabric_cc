@@ -9,28 +9,28 @@ import { Logger } from '../../src/utils/logger';
 import { HomePage } from '../../src/pages/home-page';
 
 test.describe('Parabank E2E Tests', () => {
-  test('Complete Parar-Banking Workflow - Registration to Bill Payment', async ({ 
-    page, 
+  test('Complete Parar-Banking Workflow - Registration to Bill Payment', async ({
+    page,
     request,
-    loginPage, 
-    registrationPage, 
-    homePage, 
-    registeredUser 
+    loginPage,
+    registrationPage,
+    homePage,
+    registeredUser,
   }) => {
     Logger.info('Starting complete E2E banking workflow test');
-    
+
     // Step 1: User is already registered through fixture
     Logger.info(`User registered successfully: ${registeredUser.username}`);
-    
+
     // Step 2: Login with created user
     await loginPage.navigate();
     await loginPage.login(registeredUser);
-    
+
     // Step 4: Verify navigation menu
     await homePage.verifyWelcomeMessageLeftNav();
     await homePage.verifyGlobalNavigationMenuItems();
     await homePage.verifyNavigationMenuItems();
     Logger.info('Navigation menu verification completed');
     // todo add more
-  }); 
-}); 
+  });
+});
